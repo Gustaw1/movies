@@ -39,16 +39,9 @@ public class MovieController {
 
     @GetMapping("/{filmwebId}")
     public ResponseEntity<Optional> getMovieByFilmwebId(@PathVariable String filmwebId) {
-
-        try {
-            Optional<Movie> movie = Optional.ofNullable(movieService.findByFilmwebId((filmwebId))
-                    .orElseThrow(() -> new MovieNotFoundException(filmwebId)));
-            return new ResponseEntity<Optional>(movie, HttpStatus.OK);
-        } catch (Exception e) {
-            logger.warn(e.getMessage());
-//            throw new MovieNotFoundException(filmwebId);
-            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-        }
+        Optional<Movie> movie = Optional.ofNullable(movieService.findByFilmwebId((filmwebId))
+                .orElseThrow(() -> new MovieNotFoundException(filmwebId)));
+        return new ResponseEntity<Optional>(movie, HttpStatus.OK);
     }
 
 }
